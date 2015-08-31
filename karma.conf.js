@@ -22,7 +22,7 @@ module.exports = function(config) {
 
         // test results reporter to use
         // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-        reporters: ['spec', 'coverage', 'threshold'],
+        reporters: ['spec', 'threshold'],
 
         coverageReporter: {
           'type' : 'text',
