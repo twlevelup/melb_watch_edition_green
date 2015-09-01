@@ -33,13 +33,13 @@ describe('displaying the date', function() {
 
   });
 
-  describe('when it\'s Thursday July 9th 2015', function() {
+  describe('when it\'s Thursday July 9 2015', function() {
 
     it('should display Thursday July 9 2015', function() {
       var july9th = new Date(2015, 6, 9, 12, 11, 10);
       clock.displayDateTime(july9th);
 
-      var expectedOutput = 'Thursday July 9 2015';
+      var expectedOutput = 'Thursday Jully 9 2015';
       expect($('.clock-date').text()).toEqual(expectedOutput);
     });
 
