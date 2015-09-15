@@ -12,9 +12,9 @@ var ContactsView = PageView.extend({
   template: require('../../templates/pages/contacts.hbs'),
 
   buttonEvents: {
-    right: 'goToHomePage',
+    right: 'goToListsPage',
     face: 'screenClickExample',
-    left: 'back'
+    left: 'goToHomePage'
   },
 
   initialize: function() {
@@ -41,6 +41,10 @@ var ContactsView = PageView.extend({
 
   goToHomePage: function() {
     global.App.navigate('');
+  },
+  
+  goToListsPage: function() {
+    global.App.navigate('lists');
   },
 
   render: function() {
