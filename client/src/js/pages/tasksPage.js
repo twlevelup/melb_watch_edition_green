@@ -29,9 +29,9 @@ var tasksScreen = PageView.extend({
   // TODO use jquery to load a JSON file async test?
   seedContacts: function() {
     this.tasksCollection.push([
-      {name: 'Adam', phoneNumber: '0431 111 111'},
-      {name: 'James', phoneNumber: '0431 222 222'},
-      {name: 'Marzena', phoneNumber: '0431 333 333'}
+      {taskName: 'Adam', taskDescription: '0431 111 111'},
+      {taskName: 'James', taskDescription: '0431 222 222'},
+      {taskName: 'Marzena', taskDescription: '0431 333 333'}
     ]);
   },
 
