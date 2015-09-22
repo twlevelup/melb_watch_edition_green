@@ -1,6 +1,6 @@
 var Task = Backbone.Model.extend({
   defaults: {
-    taskName: 'some task',
+    taskNum: '14681641984',
     taskDescription: 'loren ipsum'
   }
 });

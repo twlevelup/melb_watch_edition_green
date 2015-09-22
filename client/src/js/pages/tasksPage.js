@@ -23,15 +23,15 @@ var tasksScreen = PageView.extend({
     this.tasksCollection = new TasksCollection();
     this.listenTo(this.tasksCollection, 'change', this.render);
 
-    self.seedContacts();
+    self.seedTasks();
   },
 
   // TODO use jquery to load a JSON file async test?
-  seedContacts: function() {
+  seedTasks: function() {
     this.tasksCollection.push([
-      {taskName: 'Adam', taskDescription: '0431 111 111'},
-      {taskName: 'James', taskDescription: '0431 222 222'},
-      {taskName: 'Marzena', taskDescription: '0431 333 333'}
+      {taskName: 'Task1', taskDescription: 'Clean floor 1'},
+      {taskName: 'Task2', taskDescription: 'Restack books'},
+      {taskName: 'Task3', taskDescription: 'Check inventory'}
     ]);
   },
 
