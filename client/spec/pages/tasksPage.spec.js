@@ -17,11 +17,11 @@ describe('The Task Page', function() {
 
     describe('right', function() {
 
-      it('should take the user to the contacts page', function() {
+      it('should take the user to the home page', function() {
         spyOn(global.App, 'navigate');
         taskPage.setButtonEvents();
         taskPage.trigger('right');
-        expect(global.App.navigate).toHaveBeenCalledWith('contacts');
+        expect(global.App.navigate).toHaveBeenCalledWith('');
       });
     });
 
