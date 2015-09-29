@@ -4,7 +4,7 @@ var TaskView = Backbone.View.extend({
 
   tagName: 'li',
 
-  template: require('../../templates/views/task.hbs'),
+  template: require('../../templates/views/incompleteTask.hbs'),
 
   initialize: function() {
     _.bindAll(this, 'render');

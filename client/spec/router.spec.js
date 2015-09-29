@@ -3,7 +3,8 @@
 var AppRouter = require('../src/js/router.js'),
   PageView = require('../src/js/framework/page'),
   HomePage = require('../src/js/pages/homePage'),
-  ContactPage = require('../src/js/pages/contactsPage');
+  ContactPage = require('../src/js/pages/contactsPage'),
+  IncompleteTaskPage = require('../src/js/pages/incompleteTasksPage');
 
 describe('Application Router', function() {
 

@@ -9,13 +9,13 @@ var homeScreen = PageView.extend({
   template: require('../../templates/pages/home.hbs'),
 
   buttonEvents: {
-    right: 'goToTasks',
+    right: 'goToIncompleteTasks',
     top: 'scrollUp',
     bottom: 'scrollDown'
   },
 
-  goToTasks: function() {
-    global.App.navigate('tasks');
+  goToIncompleteTasks: function() {
+    global.App.navigate('incompleteTasks');
   },
 
   scrollUp: function() {

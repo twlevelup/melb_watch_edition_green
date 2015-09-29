@@ -2,18 +2,18 @@
 
 var Router = require('./framework/router.js'),
   HomePage = require('./pages/homePage'),
-  TasksPage = require('./pages/tasksPage'),
+  IncompleteTasksPage = require('./pages/incompleteTasksPage'),
   ContactsPage = require('./pages/contactsPage'),
   homePage = new HomePage(),
   contactsPage = new ContactsPage(),
-  tasksPage = new TasksPage();
+  incompleteTasksPage = new IncompleteTasksPage();
 
 var AppRouter = Router.extend({
 
   routes: {
     '': 'home',
     contacts: 'contacts',
-    tasks: 'tasks'
+    incompleteTasks: 'incompleteTasks'
   },
 
   home: function() {
@@ -24,8 +24,8 @@ var AppRouter = Router.extend({
     this.renderView(contactsPage);
   },
 
-  tasks: function() {
-    this.renderView(tasksPage);
+  incompleteTasks: function() {
+    this.renderView(incompleteTasksPage);
   }
 
 });

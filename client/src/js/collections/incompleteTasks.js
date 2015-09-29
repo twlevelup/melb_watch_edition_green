@@ -1,4 +1,4 @@
-var Task = require('../models/task');
+var Task = require('../models/incompleteTask');
 var Config = require('../config/config.js');
 
 var Tasks = Backbone.Firebase.Collection.extend({
