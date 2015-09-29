@@ -29,9 +29,9 @@ var tasksScreen = PageView.extend({
   // TODO use jquery to load a JSON file async test?
   seedTasks: function() {
     this.tasksCollection.push([
-      {taskName: 'Task1', taskDescription: 'Clean floor 1'},
-      {taskName: 'Task2', taskDescription: 'Restack books'},
-      {taskName: 'Task3', taskDescription: 'Check inventory'}
+      {taskName: '1', taskDescription: 'Clean floor 1'},
+      {taskName: '2', taskDescription: 'Restack books'},
+      {taskName: '3', taskDescription: 'Check inventory'}
     ]);
   },
 
