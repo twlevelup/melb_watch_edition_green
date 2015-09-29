@@ -22,16 +22,26 @@ var tasksScreen = PageView.extend({
 
     this.tasksCollection = new TasksCollection();
     this.listenTo(this.tasksCollection, 'change', this.render);
-
-    self.seedTasks();
+	//this.tasksCollection.each(function(temp)
+	//{
+	//	this.tasksCollection.remove(temp);
+	//});
+    //self.seedTasks();
   },
 
   // TODO use jquery to load a JSON file async test?
   seedTasks: function() {
     this.tasksCollection.push([
-      {taskName: '1', taskDescription: 'Clean floor 1'},
-      {taskName: '2', taskDescription: 'Restack books'},
-      {taskName: '3', taskDescription: 'Check inventory'}
+		{taskNum: '1', taskDescription: 'calibrate the floors'},
+		{taskNum: '2', taskDescription: 'empty the delivery trucks'},
+		{taskNum: '3', taskDescription: 'service the floors'},
+		{taskNum: '4', taskDescription: 'service the back office'},
+		{taskNum: '5', taskDescription: 'move the conveyor belts'},
+		{taskNum: '6', taskDescription: 'check the printers'},
+		{taskNum: '7', taskDescription: 'fill the delivery trucks'},
+		{taskNum: '8', taskDescription: 'calibrate the conveyor belts'},
+		{taskNum: '9', taskDescription: 'empty the printers'},
+		{taskNum: '10', taskDescription: 'service the box-flattener'}
     ]);
   },
 
