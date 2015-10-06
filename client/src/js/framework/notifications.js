@@ -91,7 +91,7 @@ var NotificationsPanel = Backbone.View.extend({
     $(this.NOTIFICATION_POPUP_SELECTOR).hide();
     $(this.NOTIFICATION_MESSAGE_SELECTOR).text('');
 
-    global.App.router.currentView.setButtonEvents();
+    //global.App.router.currentView.setButtonEvents();
   },
 
   render: function() {
