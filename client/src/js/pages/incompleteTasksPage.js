@@ -25,7 +25,7 @@ var IncompleteTasksScreen = PageView.extend({
   faceFunction: function()
   {
 		$("select[name='notification_action'] :nth-child(1)").prop("selected", true);
-		$('textarea[name="notification_message').val("Remove task: " + this.taskIds[this.current_item].get('taskDescription') + "?");
+		$('textarea[name="notification_message').val("Mark task as done: " + this.taskIds[this.current_item].get('taskDescription') + "?");
 		$("#button-sendNotification").click();
   },
   
