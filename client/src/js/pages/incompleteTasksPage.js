@@ -15,7 +15,7 @@ var IncompleteTasksScreen = PageView.extend({
   template: require('../../templates/pages/incompleteTasks.hbs'),
 
   buttonEvents: {
-    right: '',
+    right: 'goToDoneTasks',
     left: 'goToHomePage',
     top: 'scrollUp',
     bottom: 'scrollDown',
@@ -80,6 +80,10 @@ var IncompleteTasksScreen = PageView.extend({
   goToHomePage: function() {
     global.App.navigate('');
   },
+  
+  goToDoneTasks: function() {
+	global.App.navigate('donetasks');
+	},
 
 	scrollUp: function() {
 	this.clearToggle();
