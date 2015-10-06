@@ -82,7 +82,7 @@ var IncompleteTasksScreen = PageView.extend({
   },
   
   goToDoneTasks: function() {
-	global.App.navigate('donetasks');
+	global.App.navigate('doneTasks');
 	},
 
 	scrollUp: function() {
