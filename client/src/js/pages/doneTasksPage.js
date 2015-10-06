@@ -26,6 +26,7 @@ var DoneTasksScreen = PageView.extend({
 
     self.seedTasks();
   },
+  
 
   // TODO use jquery to load a JSON file async test?
   seedTasks: function() {

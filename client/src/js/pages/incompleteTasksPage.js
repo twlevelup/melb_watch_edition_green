@@ -29,6 +29,7 @@ var IncompleteTasksScreen = PageView.extend({
 		$("#button-sendNotification").click();
   },
   
+  
   removeTask: function()
   {
 	this.incompletetasksCollection.remove(this.taskIds[this.current_item]);
