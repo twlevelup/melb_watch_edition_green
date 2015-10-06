@@ -89,8 +89,8 @@ describe('The App', function() {
     });
   });
 
-  xdescribe('clock', function() {
-    it('should start the clock');
-  });
+  // describe('clock', function() {
+    // it('should start the clock');
+  // });
 
 });
