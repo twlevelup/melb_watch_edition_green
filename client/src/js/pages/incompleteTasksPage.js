@@ -9,7 +9,7 @@ var IncompleteTasksCollection = require('../collections/incompleteTasks'),
   var currentItem;
 var taskIds;
 
-var incompleteTasksScreen = PageView.extend({
+var IncompleteTasksPage = PageView.extend({
 
 
   id: 'incompleteTasks',
@@ -205,4 +205,4 @@ var incompleteTasksScreen = PageView.extend({
 
 });
 
-module.exports = incompleteTasksScreen;
+module.exports = IncompleteTasksPage;
