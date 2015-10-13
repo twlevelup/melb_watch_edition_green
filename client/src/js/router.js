@@ -2,8 +2,8 @@
 
 var Router = require('./framework/router.js'),
   HomePage = require('./pages/homePage'),
-  IncompleteTasksPage = require('./pages/IncompleteTasksPage'),
-  DoneTasksPage = require('./pages/DoneTasksPage'),
+  IncompleteTasksPage = require('./pages/incompleteTasksPage'),
+  DoneTasksPage = require('./pages/doneTasksPage'),
   ContactsPage = require('./pages/contactsPage'),
   homePage = new HomePage(),
   contactsPage = new ContactsPage(),
