@@ -10,7 +10,7 @@ var homeScreen = PageView.extend({
 
   buttonEvents: {
     right: 'goToIncompleteTasks',
-	left: 'goToDoneTasks',
+    left: 'goToDoneTasks',
     top: 'scrollUp',
     bottom: 'scrollDown'
   },
@@ -18,8 +18,8 @@ var homeScreen = PageView.extend({
   goToIncompleteTasks: function() {
     global.App.navigate('incompleteTasks');
   },
-  
-    goToDoneTasks: function() {
+
+  goToDoneTasks: function() {
     global.App.navigate('doneTasks');
   },
 
