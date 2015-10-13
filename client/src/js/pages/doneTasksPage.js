@@ -23,30 +23,30 @@ var DoneTasksScreen = PageView.extend({
 
     this.donetasksCollection = new DoneTasksCollection();
     this.listenTo(this.donetasksCollection, 'all', this.render);
-	this.listenToOnce(this.donetasksCollection, 'sync', function()
-	{
-		if(Number(this.donetasksCollection.length) !== 0)
-		{
-			this.destroyFirebase();
-		}
-	});
+    this.listenToOnce(this.donetasksCollection, 'sync', function()
+    {
+      if (Number(this.donetasksCollection.length) !== 0)
+      {
+        this.destroyFirebase();
+      }
+    });
 
     // self.seedTasks();
   },
-  
-	destroyFirebase: function()
-  {
-	var toDelete = [];
-	this.donetasksCollection.each(function(task)
-	{
-		toDelete.push(task);
-	});
-	for (var i = 0; i < toDelete.length; i=i+1)
-	{
-		this.donetasksCollection.remove(toDelete[i]);
-	}
+
+  destroyFirebase: function()
+    {
+    var toDelete = [];
+    this.donetasksCollection.each(function(task)
+    {
+      toDelete.push(task);
+    });
+
+    for (var i = 0; i < toDelete.length; i = i + 1)
+    {
+      this.donetasksCollection.remove(toDelete[i]);
+    }
   },
-  
 
   // TODO use jquery to load a JSON file async test?
   seedTasks: function() {
@@ -57,11 +57,10 @@ var DoneTasksScreen = PageView.extend({
     ]);
   },
 
-
-   goToHomePage: function() {
+  goToHomePage: function() {
     global.App.navigate('');
   },
-  
+
   goToIncompleteTasks: function() {
     global.App.navigate('incompleteTasks');
   },
