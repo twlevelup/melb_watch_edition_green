@@ -3,7 +3,8 @@
 var PageView = require('../framework/page');
 
 var IncompleteTasksCollection = require('../collections/incompleteTasks'),
-  IncompleteTaskView = require('../views/incompleteTask');
+  IncompleteTaskView = require('../views/incompleteTask'),
+  DoneTasksCollection = require('../collections/doneTasks');
   
   var current_item;
 var taskIds;
@@ -24,14 +25,18 @@ var IncompleteTasksScreen = PageView.extend({
   
   faceFunction: function()
   {
+	if (this.current_item > -1)
+	{
 		$("select[name='notification_action'] :nth-child(1)").prop("selected", true);
 		$('textarea[name="notification_message').val("Mark task as done: " + this.taskIds[this.current_item].get('taskDescription') + "?");
 		$("#button-sendNotification").click();
+	}
   },
   
   
   removeTask: function()
   {
+	this.donetasksCollection.add(this.taskIds[this.current_item]);
 	this.incompletetasksCollection.remove(this.taskIds[this.current_item]);
 	if (this.incompletetasksCollection.length > 0)
 	{
@@ -49,16 +54,18 @@ var IncompleteTasksScreen = PageView.extend({
     var self = this;
 
     this.incompletetasksCollection = new IncompleteTasksCollection();
+	this.donetasksCollection = new DoneTasksCollection();
     this.listenTo(this.incompletetasksCollection, 'all', this.render);
 	this.listenToOnce(this.incompletetasksCollection, 'sync', function()
 	{
 		if(Number(this.incompletetasksCollection.length) !== 10)
 		{
-			//console.log("synced");
 			this.destroyFirebase();
 			self.seedTasks();
 		}
 	});
+	
+	this.current_item = -1;
   },
 
   // TODO use jquery to load a JSON file async test?
@@ -79,10 +86,12 @@ var IncompleteTasksScreen = PageView.extend({
 
 
   goToHomePage: function() {
+	this.current_item = -1;
     global.App.navigate('');
   },
   
   goToDoneTasks: function() {
+	this.current_item = -1;
 	global.App.navigate('doneTasks');
 	},
 
@@ -104,10 +113,7 @@ var IncompleteTasksScreen = PageView.extend({
 			this.current_item = -1;
 		}
 	}
-	//console.log("a " + this.taskIds[this.current_item].get('id'));
-	IncompleteTasksScreen.currentTaskId = this.taskIds[this.current_item].get('id');
 	var container = $('#incompleteTasks');
-	//console.log("removing" + $("#p" + this.taskIds[this.current_item].get('taskNum')));
 	var scrollTo = $("#p" + this.taskIds[this.current_item].get('taskNum'));
 	var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight()/2;
 	scrollTo.toggleClass("highlight");
@@ -116,10 +122,8 @@ var IncompleteTasksScreen = PageView.extend({
 
   scrollDown: function() {
 	  this.clearToggle();
-    //$('#watch-face').animate({scrollTop: '+=70px'});
 	if (this.taskIds.length <= 0)
 	  {
-		  //console.log("scroll error zero tasks");
 		return;
 	  }
 	  this.current_item = this.current_item+1;
@@ -127,10 +131,7 @@ var IncompleteTasksScreen = PageView.extend({
 	{
 		this.current_item = 0;
 	}
-	//console.log("a " + this.taskIds[this.current_item].get('id'));
-	IncompleteTasksScreen.currentTaskId = this.taskIds[this.current_item].get('id');
 	var container = $('#incompleteTasks');
-	//console.log("removing" + $("#p" + this.taskIds[this.current_item].get('taskNum')));
 	var scrollTo = $("#p" + this.taskIds[this.current_item].get('taskNum'));
 	var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight()/2;
 	scrollTo.toggleClass("highlight");
@@ -147,7 +148,7 @@ var IncompleteTasksScreen = PageView.extend({
 
   destroyFirebase: function()
   {
-	  var toDelete = [];
+	var toDelete = [];
 	this.incompletetasksCollection.each(function(task)
 	{
 		toDelete.push(task);
@@ -162,10 +163,10 @@ var IncompleteTasksScreen = PageView.extend({
     var IncompleteTasksHTML = document.createDocumentFragment();
 	
 	this.taskIds = [];
-	if (this.current_item === undefined)
-	{
-		this.current_item = -1;
-	}
+	// if (this.current_item === undefined)
+	// {
+		// this.current_item = -1;
+	// }
 
     this.incompletetasksCollection.each(function(task) {
       $(IncompleteTasksHTML).append(this.createIncompleteTaskHTML(task));
@@ -185,14 +186,6 @@ var IncompleteTasksScreen = PageView.extend({
 			this.current_item = 0;
 		}
 	}
-	// if (Number(this.current_item) !== -1)
-	// {
-	  // var container = $('#incompleteTasks');
-	  // var scrollTo = $("#p" + this.taskIds[this.current_item].get('taskNum'));
-	  // var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight()/2;
-	  // console.log("scrolling down " + scrollNum + " " + scrollTo.attr("id"));
-		// $('#watch-face').animate({scrollTop: scrollNum});
-	// }
     return this;
   },
 

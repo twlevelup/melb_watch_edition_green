@@ -22,9 +22,29 @@ var DoneTasksScreen = PageView.extend({
     var self = this;
 
     this.donetasksCollection = new DoneTasksCollection();
-    this.listenTo(this.donetasksCollection, 'change', this.render);
+    this.listenTo(this.donetasksCollection, 'all', this.render);
+	this.listenToOnce(this.donetasksCollection, 'sync', function()
+	{
+		if(Number(this.donetasksCollection.length) !== 0)
+		{
+			this.destroyFirebase();
+		}
+	});
 
-    self.seedTasks();
+    // self.seedTasks();
+  },
+  
+	destroyFirebase: function()
+  {
+	var toDelete = [];
+	this.donetasksCollection.each(function(task)
+	{
+		toDelete.push(task);
+	});
+	for (var i = 0; i < toDelete.length; i=i+1)
+	{
+		this.donetasksCollection.remove(toDelete[i]);
+	}
   },
   
 

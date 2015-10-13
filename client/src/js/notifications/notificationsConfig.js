@@ -12,7 +12,7 @@ var notificationsConfig = [
       doneTask: function() 
 	  {
 		 // console.log("something!");
-		//global.App.currentView.stopListening();
+		global.App.router.currentView.stopListening();
 		global.App.router.currentView.listenTo(global.App.router.currentView.incompletetasksCollection, 'all',  global.App.router.currentView.render);
         global.App.router.currentView.removeTask();
 		global.App.router.currentView.setButtonEvents();
@@ -20,9 +20,8 @@ var notificationsConfig = [
 	  	  cancel: function()
 	  {
 		 // console.log(global.App.router.currentView.id);
-		  //global.App.router.currentView.stopListening();
+		  global.App.router.currentView.stopListening();
 		  global.App.router.currentView.listenTo(global.App.router.currentView.incompletetasksCollection, 'all',  global.App.router.currentView.render);
-		  global.App.router.currentView.render();
 		  global.App.router.currentView.setButtonEvents();
 	  }
     },
