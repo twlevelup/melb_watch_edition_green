@@ -14,7 +14,7 @@ describe('The Incomplete Tasks', function() {
   });
 
   describe('button event handlers', function() {
-    
+
     describe('left', function() {
 
       it('should take the user to the home page', function() {
@@ -25,9 +25,8 @@ describe('The Incomplete Tasks', function() {
       });
     });
 
-
-
     describe('top', function() {
+
       it('should scroll the watch face up', function() {
         spyOn(IncompleteTaskPage, 'scrollUp');
         IncompleteTaskPage.setButtonEvents();
@@ -46,6 +45,21 @@ describe('The Incomplete Tasks', function() {
     });
 
   });
+
+  // describe('swap', function() {
+  //   it('should swap tasks', function() {
+  //     var Tasks = Backbone.Collection.extend({
+  //       model: Task,
+
+  //     });
+  //     var Tasks2 = Backbone.Collection.extend({
+  //       model: Task,
+
+  //     });
+  //     var floor = {taskNum: '1', taskDescription: 'calibrate the floors'};
+  //     IncompleteTaskPage.swap(Tasks, Tasks2,floor);
+  //   });
+  // });
 
   describe('rendering', function() {
 

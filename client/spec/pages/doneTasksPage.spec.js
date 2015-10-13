@@ -14,7 +14,7 @@ describe('The Done Tasks', function() {
   });
 
   describe('button event handlers', function() {
-    
+
     describe('left', function() {
 
       it('should take the user to the incomplete tasks page', function() {
@@ -24,8 +24,8 @@ describe('The Done Tasks', function() {
         expect(global.App.navigate).toHaveBeenCalledWith('incompleteTasks');
       });
     });
-	
-	describe('right', function() {
+
+    describe('right', function() {
 
       it('should take the user to the home page', function() {
         spyOn(global.App, 'navigate');
@@ -34,8 +34,6 @@ describe('The Done Tasks', function() {
         expect(global.App.navigate).toHaveBeenCalledWith('');
       });
     });
-
-
 
     describe('top', function() {
       it('should scroll the watch face up', function() {
