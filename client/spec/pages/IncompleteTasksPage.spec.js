@@ -48,7 +48,7 @@ describe('The Incomplete Tasks', function() {
 
   describe('swap', function() {
     it('should swap tasks', function() {
-      var Task = require('../models/incompleteTask');
+      var Task = require('../../src/js/models/incompleteTask');
       var Tasks = Backbone.Collection.extend({
         model: Task,
 
