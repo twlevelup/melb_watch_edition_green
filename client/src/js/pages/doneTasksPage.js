@@ -21,6 +21,7 @@ var DoneTasksScreen = PageView.extend({
   initialize: function() {
     var self = this;
 
+    this.incompletetasksCollection = new IncompleteTasksCollection();
     this.donetasksCollection = new DoneTasksCollection();
     this.listenTo(this.donetasksCollection, 'all', this.render);
     this.listenToOnce(this.donetasksCollection, 'sync', function()
@@ -31,6 +32,7 @@ var DoneTasksScreen = PageView.extend({
       }
     });
 
+    this.currentItem = -1;
     // self.seedTasks();
   },
 
@@ -65,23 +67,82 @@ var DoneTasksScreen = PageView.extend({
     global.App.navigate('incompleteTasks');
   },
 
-  scrollUp: function() {
-    $('#watch-face').animate({scrollTop: '-=70px'});
+   scrollUp: function() {
+    this.clearToggle();
+    if (this.taskIds.length <= 0)
+    {
+      return;
+    }
+
+    this.currentItem = this.currentItem - 1;
+    if (this.currentItem < 0)
+    {
+      if (this.incompletetasksCollection.length > 0)
+      {
+        this.currentItem = this.incompletetasksCollection.length - 1;
+      }
+      else
+    {
+  this.currentItem = -1;
+    }
+}
+    var container = $('#incompleteTasks');
+    var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
+    var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
+    scrollTo.toggleClass('highlight');
+    $('#watch-face').animate({scrollTop: scrollNum});
   },
 
   scrollDown: function() {
-    $('#watch-face').animate({scrollTop: '+=70px'});
+    this.clearToggle();
+    if (this.taskIds.length <= 0)
+    {
+      return;
+    }
+
+    this.currentItem = this.currentItem + 1;
+    if (this.currentItem >= this.taskIds.length)
+    {
+      this.currentItem = 0;
+    }
+
+    var container = $('#incompleteTasks');
+    var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
+    var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
+    scrollTo.toggleClass('highlight');
+    $('#watch-face').animate({scrollTop: scrollNum});
+  },
+
+  clearToggle: function()
+  {
+    for (var i = 0; i < this.taskIds.length; i = i + 1)
+    {
+      $('#p' + this.taskIds[i].get('taskNum')).toggleClass('highlight', false);
+    }
   },
 
   render: function() {
-    this.$el.html(this.template());
+
     var DoneTasksHTML = document.createDocumentFragment();
+    this.taskIds = [];
 
     this.donetasksCollection.each(function(task) {
       $(DoneTasksHTML).append(this.createDoneTaskHTML(task));
+      this.taskIds.push(task);
     }, this);
-
+    this.$el.html(this.template());
     this.$el.append(DoneTasksHTML);
+    if (this.currentItem >= this.taskIds.length)
+    {
+      if (Number(this.taskIds.length) === 0)
+      {
+        this.currentItem = -1;
+      }
+      else
+    {
+  this.currentItem = 0;
+    }
+    }
 
     return this;
   },
