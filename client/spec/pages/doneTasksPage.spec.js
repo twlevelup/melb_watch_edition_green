@@ -1,6 +1,6 @@
 'use strict';
 
-var TaskPage = require('../../src/js/pages/DoneTasksPage'),
+var TaskPage = require('../../src/js/pages/doneTasksPage'),
   Router = require('../../src/js/router'),
   App = require('../../src/js/app');
 
