@@ -3,7 +3,8 @@
 var PageView = require('../framework/page');
 
 var DoneTasksCollection = require('../collections/doneTasks'),
-  DoneTaskView = require('../views/doneTask');
+  DoneTaskView = require('../views/doneTask'),
+  IncompleteTasksCollection = require('../collections/incompleteTasks');
 
 var DoneTasksScreen = PageView.extend({
 
@@ -15,7 +16,8 @@ var DoneTasksScreen = PageView.extend({
     right: 'goToHomePage',
     left: 'goToIncompleteTasks',
     top: 'scrollUp',
-    bottom: 'scrollDown'
+    bottom: 'scrollDown',
+    face: 'faceFunction'
   },
 
   initialize: function() {
@@ -50,6 +52,33 @@ var DoneTasksScreen = PageView.extend({
     }
   },
 
+  faceFunction: function()
+  {
+    if (this.currentItem > -1)
+    {
+      $('select[name=\'notification_action\'] :nth-child(2)').prop('selected', true);
+      $('textarea[name="notification_message').val('Mark task as not complete: ' + this.taskIds[this.currentItem].get('taskDescription') + '?');
+      $('#button-sendNotification').click();
+    }
+  },
+
+  removeTask: function()
+  {
+    this.incompletetasksCollection.add(this.taskIds[this.currentItem]);
+    this.donetasksCollection.remove(this.taskIds[this.currentItem]);
+    if (this.donetasksCollection.length > 0)
+    {
+      this.currentItem = 0;
+      $('#p' + this.taskIds[this.currentItem].get('taskNum')).toggleClass('highlight');
+    }
+    else
+  {
+  this.currentItem = -1;
+  }
+
+    $('#watch-face').animate({scrollTop: 0});
+  },
+
   // TODO use jquery to load a JSON file async test?
   seedTasks: function() {
     this.donetasksCollection.push([
@@ -60,10 +89,12 @@ var DoneTasksScreen = PageView.extend({
   },
 
   goToHomePage: function() {
+    this.currentItem = -1;
     global.App.navigate('');
   },
 
   goToIncompleteTasks: function() {
+    this.currentItem = -1;
     global.App.navigate('incompleteTasks');
   },
 
@@ -77,16 +108,16 @@ var DoneTasksScreen = PageView.extend({
     this.currentItem = this.currentItem - 1;
     if (this.currentItem < 0)
     {
-      if (this.incompletetasksCollection.length > 0)
+      if (this.donetasksCollection.length > 0)
       {
-        this.currentItem = this.incompletetasksCollection.length - 1;
+        this.currentItem = this.donetasksCollection.length - 1;
       }
       else
     {
   this.currentItem = -1;
     }
 }
-    var container = $('#incompleteTasks');
+    var container = $('#doneTasks');
     var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
     var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
     scrollTo.toggleClass('highlight');
@@ -106,7 +137,7 @@ var DoneTasksScreen = PageView.extend({
       this.currentItem = 0;
     }
 
-    var container = $('#incompleteTasks');
+    var container = $('#doneTasks');
     var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
     var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
     scrollTo.toggleClass('highlight');

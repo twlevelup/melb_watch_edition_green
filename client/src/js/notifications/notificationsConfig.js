@@ -26,6 +26,33 @@ var notificationsConfig = [
         global.App.router.currentView.setButtonEvents();
       }
     },
+
+    {
+      name: 'Incomplete task notification',
+      buttonEvents: {
+        right: 'undoneTask',
+        left: 'cancel',
+        top: 'cancel',
+        down: 'cancel'
+      },
+      undoneTask: function()
+      {
+        // console.log("something!");
+        global.App.router.currentView.stopListening();
+        global.App.router.currentView.listenTo(global.App.router.currentView.donetasksCollection, 'all',  global.App.router.currentView.render);
+        global.App.router.currentView.removeTask();
+        global.App.router.currentView.setButtonEvents();
+      },
+
+      cancel: function()
+      {
+        // console.log(global.App.router.currentView.id);
+        global.App.router.currentView.stopListening();
+        global.App.router.currentView.listenTo(global.App.router.currentView.donetasksCollection, 'all',  global.App.router.currentView.render);
+        global.App.router.currentView.setButtonEvents();
+      }
+    },
+
     {
       name: 'Go to contacts on right button',
       defaultMessage: 'Click right button to go to contacts.',
