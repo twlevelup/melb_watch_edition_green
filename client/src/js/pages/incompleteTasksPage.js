@@ -57,14 +57,14 @@ var IncompleteTasksPage = PageView.extend({
     this.incompletetasksCollection = new IncompleteTasksCollection();
     this.donetasksCollection = new DoneTasksCollection();
     this.listenTo(this.incompletetasksCollection, 'all', this.render);
-    //this.listenToOnce(this.incompletetasksCollection, 'sync', function()
-    //{
-      //if (Number(this.incompletetasksCollection.length) !== 10)
-      //{
+    this.listenToOnce(this.incompletetasksCollection, 'sync', function()
+    {
+      if (Number(this.incompletetasksCollection.length) !== 10)
+      {
         this.destroyFirebase();
         self.seedTasks();
-      //}
-    //});
+      }
+    });
 
     this.currentItem = -1;
   },
@@ -114,7 +114,10 @@ var IncompleteTasksPage = PageView.extend({
   this.currentItem = -1;
 		}
     }
+    this.hightlightScrollUp();
+  },
 
+  hightlightScrollUp: function(){
     var container = $('#incompleteTasks');
     var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
     var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
@@ -135,6 +138,10 @@ var IncompleteTasksPage = PageView.extend({
       this.currentItem = 0;
     }
 
+    this.hightlightScrollDown();
+  },
+
+  hightlightScrollDown: function(){
     var container = $('#incompleteTasks');
     var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
     var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
@@ -168,12 +175,6 @@ var IncompleteTasksPage = PageView.extend({
     var IncompleteTasksHTML = document.createDocumentFragment();
 
     this.taskIds = [];
-
-    // if (this.currentItem === undefined)
-    // {
-    // this.currentItem = -1;
-    // }
-
     this.incompletetasksCollection.each(function(task) {
       $(IncompleteTasksHTML).append(this.createIncompleteTaskHTML(task));
       this.taskIds.push(task);
