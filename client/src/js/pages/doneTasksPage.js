@@ -117,6 +117,10 @@ var DoneTasksScreen = PageView.extend({
   this.currentItem = -1;
     }
 }
+
+  },
+
+  highlightScrollUp:function() {
     var container = $('#doneTasks');
     var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
     var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
@@ -136,7 +140,9 @@ var DoneTasksScreen = PageView.extend({
     {
       this.currentItem = 0;
     }
+  },
 
+  highlightScrollDown: function() {
     var container = $('#doneTasks');
     var scrollTo = $('#p' + this.taskIds[this.currentItem].get('taskNum'));
     var scrollNum = scrollTo.offset().top - container.offset().top + container.scrollTop() - scrollTo.innerHeight() / 2;
