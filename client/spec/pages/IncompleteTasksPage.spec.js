@@ -46,9 +46,9 @@ describe('The Incomplete Tasks', function() {
 
   });
 
-  describe('swap', function() {
+  fdescribe('swap', function() {
     it('should swap tasks', function() {
-      var Task = require('../../src/js/models/incompleteTask');
+      /*var Task = require('../../src/js/models/incompleteTask');
       var Tasks = Backbone.Collection.extend({
         model: Task,
 
@@ -58,7 +58,37 @@ describe('The Incomplete Tasks', function() {
 
       });
       var floor = {taskNum: '1', taskDescription: 'calibrate the floors'};
-      IncompleteTaskPage.swap(Tasks, Tasks2,floor);
+      IncompleteTaskPage.swap(Tasks, Tasks2,floor);*/
+    //   var IncompleteTasksCollection = require('../collections/incompleteTasks');
+    //   var DoneTasksCollection = require('../collections/doneTasks');
+    //   var incompletetasksCollection = new IncompleteTasksCollection();
+    //   var donetasksCollection = new DoneTasksCollection();
+    //   var sample = [{taskName: '99', taskDescription: 'What tests'}];
+    //   var hasSample = false;
+    //   incompletetasksCollection.add(sample);
+    //   //incompletetasksCollection.each(function(task)
+    //   // {
+    //   //     if (task == sample)
+    //   //     {
+    //   //         hasSample = true;
+    //   //     }
+    //   // });
+    // var something = incompletetasksCollection.find(sample);
+    //   expect(something.length > 0);
+
+      var incompleteTasksPage = new TaskPage();
+      incompleteTasksPage.destroyFirebase();
+      incompleteTasksPage.seedTasks();
+
+      expect(incompleteTasksPage.incompletetasksCollection.length).toEqual(10);
+      expect(incompleteTasksPage.donetasksCollection.length).toEqual(0);
+
+      incompleteTasksPage.currentItem = 1;
+      incompleteTasksPage.removeTask();
+
+      expect(incompleteTasksPage.incompletetasksCollection.length).toEqual(9);
+      expect(incompleteTasksPage.donetasksCollection.length).toEqual(1);
+
     });
   });
 

@@ -57,14 +57,14 @@ var IncompleteTasksPage = PageView.extend({
     this.incompletetasksCollection = new IncompleteTasksCollection();
     this.donetasksCollection = new DoneTasksCollection();
     this.listenTo(this.incompletetasksCollection, 'all', this.render);
-    this.listenToOnce(this.incompletetasksCollection, 'sync', function()
-    {
-      if (Number(this.incompletetasksCollection.length) !== 10)
-      {
+    //this.listenToOnce(this.incompletetasksCollection, 'sync', function()
+    //{
+      //if (Number(this.incompletetasksCollection.length) !== 10)
+      //{
         this.destroyFirebase();
         self.seedTasks();
-      }
-    });
+      //}
+    //});
 
     this.currentItem = -1;
   },
