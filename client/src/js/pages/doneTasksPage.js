@@ -116,7 +116,8 @@ var DoneTasksScreen = PageView.extend({
     {
   this.currentItem = -1;
     }
-}
+  }
+  this.highlightScrollUp();
 
   },
 
@@ -140,6 +141,7 @@ var DoneTasksScreen = PageView.extend({
     {
       this.currentItem = 0;
     }
+    this.highlightScrollDown();
   },
 
   highlightScrollDown: function() {
